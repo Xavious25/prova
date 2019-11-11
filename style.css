@@ -27,16 +27,16 @@ ul li {
 }
 
 ul li:nth-child(odd) {
-    background: #f9f9f9;
+    background: red;
 }
 
 ul li:hover {
-    background: #ddd;
+    background: green;
 }
 
 ul li.checked {
-    background: #888;
-    color: #fff;
+    background: blue;
+    color: orange;
 }
 
 ul li.checked::before {
