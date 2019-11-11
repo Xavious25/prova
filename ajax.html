@@ -35,13 +35,28 @@
         function saveTodo() {
             const newTodoTitleNode = $('#newTodoTitle')[0];
             const inputValue = newTodoTitleNode.value;
-            if (inputValue === '')
+            if (inputValue === ''){
+                alert("Inserisci l'impegno");
                 return;
+            }
             newTodoTitleNode.value = '';
-            const todoItem = {title: inputValue, done: false, tms: new Date().toISOString()};
-            controller.saveTodo(todoItem, function (result) {
-                renderTodos();
-            });
+            const newTms = document.getElementById("data").value;
+            const today=moment(new Date()).format("YYYY-MM-DD");
+            if(newTms==="") {
+                alert("Nessuna data inserita. Inseriscila!");
+                return;
+            }
+            else {
+                if (newTms < today) {
+                    alert("Data non valida. Inserire una data superiore o uguale a oggi");
+                    return;
+                } else {
+                    const todoItem = {title: inputValue, done: false, tms: newTms};
+                    controller.saveTodo(todoItem, function (result) {
+                        renderTodos();
+                    });
+                }
+            }
         }
 
         function emptyTodoList() {
@@ -102,6 +117,7 @@
     <div id="newTodoDiv" class="header">
        <h2 class="title">My To Do List</h2>
         <input type="text" id="newTodoTitle" placeholder="New todo title..."/>
+        <input type="date" id="data" placeholder="Inserisci una data"/>
       <span onclick="saveTodo()" class="addBtn">Add</span>
     </div>
     <div id="filters" class="filters-row">
